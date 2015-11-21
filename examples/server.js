@@ -1,4 +1,4 @@
-var mc = require('../index');
+var mc = require('../');
 
 var options = { port: 25565 };
 var server = mc.createServer(options);

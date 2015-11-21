@@ -1,5 +1,4 @@
 var Server = require('./server');
-module.exports = createServer;
 
 function createServer(options) {
   options = options || {};
@@ -76,3 +75,5 @@ function createServer(options) {
         return server;
   });
 }
+
+module.exports = {createServer:createServer};

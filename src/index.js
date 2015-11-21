@@ -1,4 +1,5 @@
 module.exports={
   createSerializer:require("./transforms/serializer").createSerializer,
-  createDeserializer:require("./transforms/serializer").createDeserializer
+  createDeserializer:require("./transforms/serializer").createDeserializer,
+  createServer:require("./createServer").createServer
 };
