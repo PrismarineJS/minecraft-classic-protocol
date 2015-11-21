@@ -5,26 +5,13 @@ var createSerializer = require("./transforms/serializer").createSerializer;
 var createDeserializer = require("./transforms/serializer").createDeserializer;
 
 class Client extends EventEmitter {
-  packetsToParse = {};
   serializer;
-  splitter = framing.createSplitter();
   deserializer;
   isServer;
-  version;
 
   constructor(isServer) {
     super();
     this.isServer = !!isServer;
-
-    this.on('newListener', function (event, listener) {
-      var direction = this.isServer ? 'toServer' : 'toClient';
-      if (typeof this.packetsToParse[event] === "undefined") this.packetsToParse[event] = 1;
-      else this.packetsToParse[event] += 1;
-    });
-    this.on('removeListener', function (event, listener) {
-      var direction = this.isServer ? 'toServer' : 'toClient';
-      this.packetsToParse[event] -= 1;
-    });
   }
 
 
@@ -47,7 +34,7 @@ class Client extends EventEmitter {
       var parts = e.field.split(".");
       parts.shift();
       var deserializerDirection = this.isServer ? 'toServer' : 'toClient';
-      e.field = [this.protocolState, deserializerDirection].concat(parts).join(".");
+      e.field = [deserializerDirection].concat(parts).join(".");
       e.message = `Deserialization error for ${e.field} : ${e.message}`;
       this.emit('error', e);
     });
