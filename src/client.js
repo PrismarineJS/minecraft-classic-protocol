@@ -43,6 +43,9 @@ class Client extends EventEmitter {
       parsed.metadata.name = parsed.data.name;
       parsed.data = parsed.data.params;
       this.emit('packet', parsed.data, parsed.metadata);
+
+      debug("reading packet " + "." + parsed.metadata.name);
+      debug(parsed.data);
       this.emit(parsed.metadata.name, parsed.data, parsed.metadata);
       this.emit('raw.' + parsed.metadata.name, parsed.buffer, parsed.metadata);
       this.emit('raw', parsed.buffer, parsed.metadata);

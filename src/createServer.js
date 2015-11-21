@@ -75,6 +75,7 @@ function createServer(options) {
               "server_motd": "test",
               "user_type": 0
             });
+          server.emit('login', client);
         }
 
         function loginClient() {}

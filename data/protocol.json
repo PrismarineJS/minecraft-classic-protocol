@@ -1,7 +1,6 @@
 {
   "toServer": {
     "player_identification": {
-      "name": "player_identification",
       "id": "0x00",
       "fields": [
         {
@@ -15,11 +14,14 @@
         {
           "name": "verification_key",
           "type": "string"
+        },
+        {
+          "name": "unused",
+          "type": "byte"
         }
       ]
     },
     "set_block": {
-      "name": "set_block",
       "id": "0x05",
       "fields": [
         {
@@ -45,7 +47,6 @@
       ]
     },
     "position": {
-      "name": "position",
       "id": "0x08",
       "fields": [
         {
@@ -75,7 +76,6 @@
       ]
     },
     "message": {
-      "name": "message",
       "id": "0x0d",
       "fields": [
         {
@@ -91,7 +91,6 @@
   },
   "toClient": {
     "server_identification": {
-      "name": "server_identification",
       "id": "0x00",
       "fields": [
         {
@@ -113,21 +112,16 @@
       ]
     },
     "ping": {
-      "name": "ping",
       "id": "0x01",
       "fields": [
-        {}
       ]
     },
     "level_initialize": {
-      "name": "level_initialize",
       "id": "0x02",
       "fields": [
-        {}
       ]
     },
     "level_data_chunk": {
-      "name": "level_data_chunk",
       "id": "0x03",
       "fields": [
         {
@@ -145,7 +139,6 @@
       ]
     },
     "level_finalize": {
-      "name": "level_finalize",
       "id": "0x04",
       "fields": [
         {
@@ -163,7 +156,6 @@
       ]
     },
     "set_block": {
-      "name": "set_block",
       "id": "0x06",
       "fields": [
         {
@@ -185,7 +177,6 @@
       ]
     },
     "spawn_player": {
-      "name": "spawn_player",
       "id": "0x07",
       "fields": [
         {
@@ -215,7 +206,6 @@
       ]
     },
     "player_teleport": {
-      "name": "player_teleport",
       "id": "0x08",
       "fields": [
         {
@@ -245,7 +235,6 @@
       ]
     },
     "position_and_orientation_update": {
-      "name": "position_and_orientation_update",
       "id": "0x09",
       "fields": [
         {
@@ -275,7 +264,6 @@
       ]
     },
     "position_update": {
-      "name": "position_update",
       "id": "0x0a",
       "fields": [
         {
@@ -297,7 +285,6 @@
       ]
     },
     "orientation_update": {
-      "name": "orientation_update",
       "id": "0x0b",
       "fields": [
         {
@@ -315,7 +302,6 @@
       ]
     },
     "despawn_player": {
-      "name": "despawn_player",
       "id": "0x0c",
       "fields": [
         {
@@ -325,7 +311,6 @@
       ]
     },
     "message": {
-      "name": "message",
       "id": "0x0d",
       "fields": [
         {
@@ -339,7 +324,6 @@
       ]
     },
     "disconnect_player": {
-      "name": "disconnect_player",
       "id": "0x0e",
       "fields": [
         {
@@ -349,7 +333,6 @@
       ]
     },
     "update_user_type": {
-      "name": "update_user_type",
       "id": "0x0f",
       "fields": [
         {

@@ -14,8 +14,8 @@ server.on('login', function(client) {
     players--;
   });
 
-  client.write('level_initalize', { });
-  client.write('level_data_chunk', {
+  client.write('level_initialize', {});
+  /*client.write('level_data_chunk', {
     chunk_length: 0,
     chunk_data: 0,
     percent_complete: 100
@@ -35,7 +35,7 @@ server.on('login', function(client) {
     z: 0,
     yaw: 0,
     pitch: 0
-  });
+  });*/
 
 });
 
