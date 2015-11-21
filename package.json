@@ -1,0 +1,15 @@
+{
+  "name": "minecraft-classic-protocol",
+  "version": "1.0.0",
+  "description": "Language independent module providing minecraft classic data for minecraft clients, servers and libraries",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "minecraft",
+    "classic",
+    "protocol"
+  ],
+  "author": "mhsjlw <mhsjlw@aol.com>",
+  "license": "MIT"
+}

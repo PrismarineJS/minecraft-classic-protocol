@@ -1,0 +1,362 @@
+{
+  "toServer": {
+    "player_identification": {
+      "name": "player_identification",
+      "id": "0x00",
+      "fields": [
+        {
+          "name": "protocol_version",
+          "type": "ubyte"
+        },
+        {
+          "name": "username",
+          "type": "string"
+        },
+        {
+          "name": "verification_key",
+          "type": "string"
+        }
+      ]
+    },
+    "set_block": {
+      "name": "set_block",
+      "id": "0x05",
+      "fields": [
+        {
+          "name": "x",
+          "type": "short"
+        },
+        {
+          "name": "y",
+          "type": "short"
+        },
+        {
+          "name": "z",
+          "type": "short"
+        },
+        {
+          "name": "mode",
+          "type": "ubyte"
+        },
+        {
+          "name": "block_type",
+          "type": "ubyte"
+        }
+      ]
+    },
+    "position": {
+      "name": "position",
+      "id": "0x08",
+      "fields": [
+        {
+          "name": "player_id",
+          "type": "ubyte"
+        },
+        {
+          "name": "x",
+          "type": "short"
+        },
+        {
+          "name": "y",
+          "type": "short"
+        },
+        {
+          "name": "z",
+          "type": "short"
+        },
+        {
+          "name": "yaw",
+          "type": "ubyte"
+        },
+        {
+          "name": "pitch",
+          "type": "ubyte"
+        }
+      ]
+    },
+    "message": {
+      "name": "message",
+      "id": "0x0d",
+      "fields": [
+        {
+          "name": "unused",
+          "type": "ubyte"
+        },
+        {
+          "name": "message",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "toClient": {
+    "server_identification": {
+      "name": "server_identification",
+      "id": "0x00",
+      "fields": [
+        {
+          "name": "protocol_version",
+          "type": "ubyte"
+        },
+        {
+          "name": "server_name",
+          "type": "string"
+        },
+        {
+          "name": "server_motd",
+          "type": "string"
+        },
+        {
+          "name": "user_type",
+          "type": "string"
+        }
+      ]
+    },
+    "ping": {
+      "name": "ping",
+      "id": "0x01",
+      "fields": [
+        {}
+      ]
+    },
+    "level_initialize": {
+      "name": "level_initialize",
+      "id": "0x02",
+      "fields": [
+        {}
+      ]
+    },
+    "level_data_chunk": {
+      "name": "level_data_chunk",
+      "id": "0x03",
+      "fields": [
+        {
+          "name": "chunk_length",
+          "type": "short"
+        },
+        {
+          "name": "chunk_data",
+          "type": "byte_array"
+        },
+        {
+          "name": "percent_complete",
+          "type": "ubyte"
+        }
+      ]
+    },
+    "level_finalize": {
+      "name": "level_finalize",
+      "id": "0x04",
+      "fields": [
+        {
+          "name": "x_size",
+          "type": "short"
+        },
+        {
+          "name": "y_size",
+          "type": "short"
+        },
+        {
+          "name": "z_size",
+          "type": "short"
+        }
+      ]
+    },
+    "set_block": {
+      "name": "set_block",
+      "id": "0x06",
+      "fields": [
+        {
+          "name": "x",
+          "type": "short"
+        },
+        {
+          "name": "y",
+          "type": "short"
+        },
+        {
+          "name": "z",
+          "type": "short"
+        },
+        {
+          "name": "block_type",
+          "type": "ubyte"
+        }
+      ]
+    },
+    "spawn_player": {
+      "name": "spawn_player",
+      "id": "0x07",
+      "fields": [
+        {
+          "name": "player_name",
+          "type": "string"
+        },
+        {
+          "name": "x",
+          "type": "short"
+        },
+        {
+          "name": "y",
+          "type": "short"
+        },
+        {
+          "name": "z",
+          "type": "short"
+        },
+        {
+          "name": "yaw",
+          "type": "ubyte"
+        },
+        {
+          "name": "pitch",
+          "type": "ubyte"
+        }
+      ]
+    },
+    "player_teleport": {
+      "name": "player_teleport",
+      "id": "0x08",
+      "fields": [
+        {
+          "name": "player_id",
+          "type": "byte"
+        },
+        {
+          "name": "x",
+          "type": "short"
+        },
+        {
+          "name": "y",
+          "type": "short"
+        },
+        {
+          "name": "z",
+          "type": "short"
+        },
+        {
+          "name": "yaw",
+          "type": "ubyte"
+        },
+        {
+          "name": "pitch",
+          "type": "ubyte"
+        }
+      ]
+    },
+    "position_and_orientation_update": {
+      "name": "position_and_orientation_update",
+      "id": "0x09",
+      "fields": [
+        {
+          "name": "player_id",
+          "type": "byte"
+        },
+        {
+          "name": "change_in_x",
+          "type": "byte"
+        },
+        {
+          "name": "change_in_y",
+          "type": "byte"
+        },
+        {
+          "name": "change_in_z",
+          "type": "byte"
+        },
+        {
+          "name": "yaw",
+          "type": "byte"
+        },
+        {
+          "name": "pitch",
+          "type": "byte"
+        }
+      ]
+    },
+    "position_update": {
+      "name": "position_update",
+      "id": "0x0a",
+      "fields": [
+        {
+          "name": "player_id",
+          "type": "byte"
+        },
+        {
+          "name": "change_in_x",
+          "type": "byte"
+        },
+        {
+          "name": "change_in_y",
+          "type": "byte"
+        },
+        {
+          "name": "change_in_z",
+          "type": "byte"
+        }
+      ]
+    },
+    "orientation_update": {
+      "name": "orientation_update",
+      "id": "0x0b",
+      "fields": [
+        {
+          "name": "player_id",
+          "type": "byte"
+        },
+        {
+          "name": "yaw",
+          "type": "ubyte"
+        },
+        {
+          "name": "pitch",
+          "type": "ubyte"
+        }
+      ]
+    },
+    "despawn_player": {
+      "name": "despawn_player",
+      "id": "0x0c",
+      "fields": [
+        {
+          "name": "player_id",
+          "type": "byte"
+        }
+      ]
+    },
+    "message": {
+      "name": "message",
+      "id": "0x0d",
+      "fields": [
+        {
+          "name": "player_id",
+          "type": "byte"
+        },
+        {
+          "name": "message",
+          "type": "string"
+        }
+      ]
+    },
+    "disconnect_player": {
+      "name": "disconnect_player",
+      "id": "0x0e",
+      "fields": [
+        {
+          "name": "disconnect_reason",
+          "type": "string"
+        }
+      ]
+    },
+    "update_user_type": {
+      "name": "update_user_type",
+      "id": "0x0f",
+      "fields": [
+        {
+          "name": "user_type",
+          "type": "ubyte"
+        }
+      ]
+    }
+  }
+}
