@@ -31,6 +31,7 @@ function createServer(options) {
         var lastPing = null;
 
         var pingTimer = null;
+        var kickTimeout = options.kickTimeout || 10 * 1000;
         var loginKickTimer = setTimeout(kickForNotLoggingIn, kickTimeout);
 
         var serverId;
@@ -44,7 +45,7 @@ function createServer(options) {
             return;
 
           var elapsed = new Date() - lastPing;
-          if (elapsed > pingTimeout) {
+          if (elapsed > kickTimeout) {
             client.end('PingTimeout');
             return;
           }
@@ -67,7 +68,14 @@ function createServer(options) {
           clearTimeout(loginKickTimer);
         }
 
-        function onLogin(packet) {}
+        function onLogin(packet) {
+          client.write("server_identification",{
+              "protocol_version": 0x07,
+              "server_name": "test",
+              "server_motd": "test",
+              "user_type": 0
+            });
+        }
 
         function loginClient() {}
   });

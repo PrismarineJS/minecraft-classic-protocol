@@ -18,7 +18,7 @@ serializer.write({
     "protocol_version": 0x07,
     "server_name": "test",
     "server_motd": "test",
-    "user_type": "test"
+    "user_type": 0
   }
 });
 

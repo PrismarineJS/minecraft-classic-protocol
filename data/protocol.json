@@ -108,7 +108,7 @@
         },
         {
           "name": "user_type",
-          "type": "string"
+          "type": "byte"
         }
       ]
     },
