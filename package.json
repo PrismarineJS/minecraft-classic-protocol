@@ -14,13 +14,14 @@
   "author": "mhsjlw <mhsjlw@aol.com>",
   "license": "MIT",
   "dependencies": {
+    "protodef": "0.2.2"
+  },
+  "devDependencies": {
     "gulp": "3.9.0",
     "gulp-babel": "6.1.0",
     "gulp-plumber": "1.0.1",
-    "gulp-sourcemaps": "1.6.0",
-    "protodef": "0.2.2"
+    "gulp-sourcemaps": "1.6.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mhsjlw/minecraft-classic-protocol.git"
