@@ -1,10 +1,16 @@
-minecraft-classic-data
-======================
+minecraft-classic-protocol
+==========================
 
-Language independent module providing minecraft classic protocol for minecraft classic clients, servers and libraries.
+Parse and serialize minecraft classic packets.
 
-## Sources
-We retrieved this data off of wiki.vg's [minecraft classic](http://wiki.vg/Category:Minecraft_Classic) page
+## Features
+  
+  * Supports minecraft v1.2.3_01a
+
+## Installation
+Simply run
+
+    npm install minecraft-classic-protcol --save
 
 ## People
 This project is run by
