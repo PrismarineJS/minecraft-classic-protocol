@@ -19,5 +19,14 @@
     "gulp-plumber": "1.0.1",
     "gulp-sourcemaps": "1.6.0",
     "protodef": "0.2.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhsjlw/minecraft-classic-protocol.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mhsjlw/minecraft-classic-protocol/issues"
+  },
+  "homepage": "https://github.com/mhsjlw/minecraft-classic-protocol#readme"
 }
