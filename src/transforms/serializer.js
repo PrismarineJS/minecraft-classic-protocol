@@ -4,7 +4,7 @@ var Parser = require("protodef").Parser;
 
 var minecraft = require("../datatypes/minecraft");
 
-function createProtocol(types, packets) {
+function createProtocol(types, packets) { -> function createProtocol(packets) {
   var proto = new ProtoDef();
 
   Object.keys(packets).forEach(function (name) {
