@@ -16,8 +16,8 @@ class Client extends EventEmitter {
 
 
   setSerializer() {
-    this.serializer = createSerializer(isServer: this.isServer);
-    this.deserializer = createDeserializer(isServer: this.isServer);
+    this.serializer = createSerializer(this.isServer);
+    this.deserializer = createDeserializer(this.isServer);
 
 
     this.serializer.on('error', (e) => {
