@@ -24,7 +24,7 @@ class Client extends EventEmitter {
       var parts = e.field.split(".");
       parts.shift();
       var serializerDirection = !this.isServer ? 'toServer' : 'toClient';
-      e.field = [this.protocolState, serializerDirection].concat(parts).join(".");
+      e.field = [serializerDirection].concat(parts).join(".");
       e.message = `Serialization error for ${e.field} : ${e.message}`;
       this.emit('error', e);
     });
