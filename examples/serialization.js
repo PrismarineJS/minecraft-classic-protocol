@@ -11,6 +11,17 @@ serializer.write({
     "z_size": 1
   }
 });
+
+serializer.write({
+  name: "server_identification",
+  params: {
+    "protocol_version": 0x07,
+    "server_name": "test",
+    "server_motd": "test",
+    "user_type": "test"
+  }
+});
+
 serializer.pipe(parser);
 
 parser.on('data', function (chunk) {

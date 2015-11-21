@@ -7,6 +7,8 @@ var minecraft = require("../datatypes/minecraft");
 function createProtocol(packets) {
   var proto = new ProtoDef();
 
+  proto.addTypes(minecraft);
+
   Object.keys(packets).forEach(function (name) {
     proto.addType("packet_" + name, ["container", packets[name].fields]);
   });
