@@ -8,7 +8,7 @@ function createServer(options) {
     options['server-port'] :
     25565;
   var host = options.host || '0.0.0.0';
-  var ping = options.pingTimeout || 10 * 1000;
+  var kickTimeout = options.kickTimeout || 10 * 1000;
   var checkTimeoutInterval = options.checkTimeoutInterval || 4 * 1000;
   var onlineMode = options['online-mode'] == null ? true : options['online-mode'];
   var beforePing = options.beforePing || null;
@@ -31,7 +31,7 @@ function createServer(options) {
         var lastPing = null;
 
         var keepPingTimer = null;
-        var loginKickTimer = setTimeout(kickForNotLoggingIn, pingTimeout);
+        var loginKickTimer = setTimeout(kickForNotLoggingIn, kickTimeout);
 
         var serverId;
 

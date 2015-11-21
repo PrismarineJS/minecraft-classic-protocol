@@ -79,10 +79,10 @@ class Client extends EventEmitter {
     this.socket.on('close', endSocket);
     this.socket.on('end', endSocket);
     this.socket.on('timeout', endSocket);
-    this.splitter.on('error', onError);
 
-    this.socket.pipe(this.splitter).pipe(this.deserializer);
-    this.serializer.pipe(this.framer).pipe(this.socket);
+    this.setSerializer();
+    this.socket.pipe(this.deserializer);
+    this.serializer.pipe(this.socket);
   }
 
   end(reason) {
@@ -100,10 +100,7 @@ class Client extends EventEmitter {
   }
 
   writeRaw(buffer) {
-    if (this.compressor === null)
-      this.framer.write(buffer);
-    else
-      this.compressor.write(buffer);
+    this.socket.write(buffer);
   }
 }
 
