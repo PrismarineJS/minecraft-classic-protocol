@@ -7,13 +7,6 @@ var minecraft = require("../datatypes/minecraft");
 function createProtocol(types, packets) {
   var proto = new ProtoDef();
 
-  proto.addType("string", ["pstring", {
-    countType: "varint"
-  }]);
-
-  proto.addTypes(minecraft);
-  proto.addTypes(types);
-
   Object.keys(packets).forEach(function (name) {
     proto.addType("packet_" + name, ["container", packets[name].fields]);
   });
@@ -40,9 +33,7 @@ function createProtocol(types, packets) {
   return proto;
 }
 
-function createSerializer({
-  isServer = false, version
-} = {}) {
+function createSerializer(isServer = false) {
   var mcData = require("../../data/protocol");
   var direction = !isServer ? 'toServer' : 'toClient';
   var packets = mcData[direction];
@@ -50,12 +41,7 @@ function createSerializer({
   return new Serializer(proto, "packet");
 }
 
-function createDeserializer({
-  isServer = false,
-    packetsToParse = {
-      "packet": true
-    }, version
-} = {}) {
+function createDeserializer(isServer = false) {
   var mcData = require("../../data/protocol");
   var direction = isServer ? "toServer" : "toClient";
   var packets = mcData[direction];
