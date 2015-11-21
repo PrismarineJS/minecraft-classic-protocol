@@ -1,0 +1,123 @@
+var EventEmitter = require('events').EventEmitter;
+var debug = require('./debug');
+
+var createSerializer = require("./transforms/serializer").createSerializer;
+var createDeserializer = require("./transforms/serializer").createDeserializer;
+
+class Client extends EventEmitter {
+  packetsToParse = {};
+  serializer;
+  splitter = framing.createSplitter();
+  deserializer;
+  isServer;
+  version;
+
+  constructor(isServer) {
+    super();
+    this.isServer = !!isServer;
+
+    this.on('newListener', function (event, listener) {
+      var direction = this.isServer ? 'toServer' : 'toClient';
+      if (typeof this.packetsToParse[event] === "undefined") this.packetsToParse[event] = 1;
+      else this.packetsToParse[event] += 1;
+    });
+    this.on('removeListener', function (event, listener) {
+      var direction = this.isServer ? 'toServer' : 'toClient';
+      this.packetsToParse[event] -= 1;
+    });
+  }
+
+
+  setSerializer() {
+    this.serializer = createSerializer(isServer: this.isServer);
+    this.deserializer = createDeserializer(isServer: this.isServer);
+
+
+    this.serializer.on('error', (e) => {
+      var parts = e.field.split(".");
+      parts.shift();
+      var serializerDirection = !this.isServer ? 'toServer' : 'toClient';
+      e.field = [this.protocolState, serializerDirection].concat(parts).join(".");
+      e.message = `Serialization error for ${e.field} : ${e.message}`;
+      this.emit('error', e);
+    });
+
+
+    this.deserializer.on('error', (e) => {
+      var parts = e.field.split(".");
+      parts.shift();
+      var deserializerDirection = this.isServer ? 'toServer' : 'toClient';
+      e.field = [this.protocolState, deserializerDirection].concat(parts).join(".");
+      e.message = `Deserialization error for ${e.field} : ${e.message}`;
+      this.emit('error', e);
+    });
+
+    this.deserializer.on('data', (parsed) => {
+      parsed.metadata.name = parsed.data.name;
+      parsed.data = parsed.data.params;
+      this.emit('packet', parsed.data, parsed.metadata);
+      this.emit(parsed.metadata.name, parsed.data, parsed.metadata);
+      this.emit('raw.' + parsed.metadata.name, parsed.buffer, parsed.metadata);
+      this.emit('raw', parsed.buffer, parsed.metadata);
+    });
+  }
+
+  setSocket(socket) {
+    var ended = false;
+
+    var endSocket = () => {
+      if (ended) return;
+      ended = true;
+      this.socket.removeListener('close', endSocket);
+      this.socket.removeListener('end', endSocket);
+      this.socket.removeListener('timeout', endSocket);
+      this.emit('end', this._endReason);
+    };
+
+    var onFatalError = (err) => {
+      this.emit('error', err);
+      endSocket();
+    };
+
+    var onError = (err) => this.emit('error', err);
+
+    this.socket = socket;
+
+    if (this.socket.setNoDelay)
+      this.socket.setNoDelay(true);
+
+    this.socket.on('connect', () => this.emit('connect'));
+
+    this.socket.on('error', onFatalError);
+    this.socket.on('close', endSocket);
+    this.socket.on('end', endSocket);
+    this.socket.on('timeout', endSocket);
+    this.splitter.on('error', onError);
+
+    this.socket.pipe(this.splitter).pipe(this.deserializer);
+    this.serializer.pipe(this.framer).pipe(this.socket);
+  }
+
+  end(reason) {
+    this._endReason = reason;
+    if (this.socket) this.socket.end();
+  }
+
+  write(name, params) {
+    debug("writing packet " + this.state + "." + name);
+    debug(params);
+    this.serializer.write({
+      name,
+      params
+    });
+  }
+
+  writeRaw(buffer) {
+    if (this.compressor === null)
+      this.framer.write(buffer);
+    else
+      this.compressor.write(buffer);
+  }
+}
+
+module.exports = Client;
