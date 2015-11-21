@@ -30,7 +30,7 @@ function createServer(options) {
         var loggedIn = false;
         var lastPing = null;
 
-        var keepPingTimer = null;
+        var pingTimer = null;
         var loginKickTimer = setTimeout(kickForNotLoggingIn, kickTimeout);
 
         var serverId;
