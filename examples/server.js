@@ -1,4 +1,4 @@
-var mc = require('../../');
+var mc = require('../index');
 
 var options = { port: 25565 };
 var server = mc.createServer(options);
@@ -28,8 +28,8 @@ server.on('login', function(client) {
   });
 
   client.write('spawn_player', {
-    player_id: players;
-    player_name: "player" + players;
+    player_id: players,
+    player_name: "player" + players,
     x: 0,
     y: 0,
     z: 0,
