@@ -180,6 +180,10 @@
       "id": "0x07",
       "fields": [
         {
+          "name": "player_id",
+          "type":"byte"
+        },
+        {
           "name": "player_name",
           "type": "string"
         },
