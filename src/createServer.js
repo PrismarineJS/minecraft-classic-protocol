@@ -72,8 +72,8 @@ function createServer(options) {
         function loginClient() {}
 
         server.listen(port, host);
-        return server;
   });
+  return server;
 }
 
 module.exports = {createServer:createServer};
