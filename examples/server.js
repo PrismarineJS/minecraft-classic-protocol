@@ -44,5 +44,5 @@ server.on('error', function(error) {
 });
 
 server.on('listening', function() {
-  console.log('Server running! ', server.socketServer.address().port);
+  console.log('Server running on port', server.socketServer.address().port + "!");
 });

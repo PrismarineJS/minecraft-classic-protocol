@@ -70,9 +70,8 @@ function createServer(options) {
         function onLogin(packet) {}
 
         function loginClient() {}
-
-        server.listen(port, host);
   });
+  server.listen(port, host);
   return server;
 }
 
