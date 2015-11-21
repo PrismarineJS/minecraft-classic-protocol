@@ -11,6 +11,7 @@ server.on('login', function(client) {
 
   client.on('end', function() {
     console.log("Someone left!");
+    players--;
   });
 
   client.write('level_initalize', { });
