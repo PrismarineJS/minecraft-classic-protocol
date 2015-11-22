@@ -1,6 +1,6 @@
 {
   "name": "minecraft-classic-protocol",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "index.js",
   "description": "Parse and serialize minecraft classic packets.",
   "scripts": {
