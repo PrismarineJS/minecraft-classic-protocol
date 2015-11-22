@@ -45,10 +45,10 @@ function readByteArray(buffer, offset) {
   return results;
 }
 
-function writeByteArray(value, buffer, offset, typeArgs, rootNode) {
+function writeByteArray(value, buffer, offset) {
     for(var index in value) {
     tryCatch(() => {
-      offset = this.write(value[index], buffer, offset, typeArgs.type, rootNode);
+      offset = this.write(value[index], buffer, offset, "byte");
     }, (e) => {
       addErrorField(e, index);
       throw e;
