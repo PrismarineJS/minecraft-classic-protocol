@@ -28,21 +28,27 @@ var zlib = require("zlib");
 
 // TODO: fix this (we only need write currently so I didn't fix it)
 function readByteArray(buffer, offset) {
+  var countResults = this.read(buffer, offset, "short");
+
   var results = {
     value: [],
-    size: 1024
+    size: 2
   };
-  var count=1024;
-  for(var i = 0; i < count; i++) {
+
+  var uncompressed=zlib.deflateSync(buffer.slice(offset+2,offset+countResults.value));
+  results.size+=uncompressed.length;
+
+  var off=0;
+  for(var i = 0; i < uncompressed.length; i++) {
     var readResults;
     tryCatch(() => {
-      readResults = this.read(buffer, offset, "byte");
+      readResults = this.read(uncompressed.length, off, "byte");
     }, (e) => {
       addErrorField(e, i);
       throw e;
     });
     results.size += readResults.size;
-    offset += readResults.size;
+    off += readResults.size;
     results.value.push(readResults.value);
   }
   return results;

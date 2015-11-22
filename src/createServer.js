@@ -55,4 +55,4 @@ function createServer(options) {
   return server;
 }
 
-module.exports = {createServer:createServer};
+module.exports = createServer;

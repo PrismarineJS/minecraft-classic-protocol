@@ -15,8 +15,14 @@ server.on('login', function(client) {
   });
 
   client.write('level_initialize', {});
+
+  var map=[];
+  for(var i=0;i<1020;i++) {
+    map.push(1);
+  }
+
   client.write('level_data_chunk', {
-    chunk_data: [1,2,3],
+    chunk_data: map,
     percent_complete: 100
   });
 
