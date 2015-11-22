@@ -23,49 +23,21 @@ function createServer(options) {
   
   server.on("connection", function (client) {
         client.once('player_identification', onLogin);
-        client.once('ping_start', onPing);
         client.on('end', onEnd);
 
-        var ping = false;
-        var loggedIn = false;
-        var lastPing = null;
-
+        var ping = true;
         var pingTimer = null;
-        var kickTimeout = options.kickTimeout || 10 * 1000;
-        var loginKickTimer = setTimeout(kickForNotLoggingIn, kickTimeout);
-
-        var serverId;
-
-        function kickForNotLoggingIn() {
-          client.end('LoginTimeout');
-        }
 
         function pingLoop() {
-          if (!ping)
-            return;
-
-          var elapsed = new Date() - lastPing;
-          if (elapsed > kickTimeout) {
-            client.end('PingTimeout');
-            return;
-          }
           client.write('ping', {});
         }
 
-        function onPing(packet) {
-          lastPing = new Date();
-        }
-
         function startPing() {
-          ping = true;
-          lastPing = new Date();
           pingTimer = setInterval(pingLoop, checkTimeoutInterval);
-          client.on('ping', onPing);
         }
 
         function onEnd() {
           clearInterval(pingTimer);
-          clearTimeout(loginKickTimer);
         }
 
         function onLogin(packet) {
@@ -76,9 +48,8 @@ function createServer(options) {
               "user_type": 0
             });
           server.emit('login', client);
+          startPing();
         }
-
-        function loginClient() {}
   });
   server.listen(port, host);
   return server;

@@ -19,13 +19,13 @@ server.on('login', function(client) {
     chunk_length: 0,
     chunk_data: 0,
     percent_complete: 100
-  });
+  });*/
 
-  client.write('level_finalize', {
+  /*client.write('level_finalize', {
     x_size: 10,
     y_size: 10,
     z_size: 10
-  });
+  });*/
 
   client.write('spawn_player', {
     player_id: players,
@@ -35,7 +35,7 @@ server.on('login', function(client) {
     z: 0,
     yaw: 0,
     pitch: 0
-  });*/
+  });
 
 });
 
