@@ -18,7 +18,6 @@ class Server extends EventEmitter {
       var client = new Client(true);
       client._end = client.end;
       client.end = function end(endReason) {
-        endReason = '{"text":"' + endReason + '"}';
         client.write('disconnect_player', {
           disconnect_reason: endReason
         });
