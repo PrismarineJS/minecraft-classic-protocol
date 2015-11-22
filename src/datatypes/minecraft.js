@@ -36,19 +36,18 @@ function readByteArray(buffer, offset) {
   };
 
   var uncompressed=zlib.deflateSync(buffer.slice(offset+2,offset+countResults.value));
-  results.size+=uncompressed.length;
+  results.size+=1024;
 
   var off=0;
   for(var i = 0; i < uncompressed.length; i++) {
     var readResults;
     try {
-      readResults = this.read(uncompressed, off, "byte");
+      readResults = this.read(uncompressed, off, "ubyte");
     }
     catch(e){
       addErrorField(e, i);
       throw e;
     }
-    results.size += readResults.size;
     off += readResults.size;
     results.value.push(readResults.value);
   }
