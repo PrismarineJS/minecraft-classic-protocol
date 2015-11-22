@@ -125,10 +125,6 @@
       "id": "0x03",
       "fields": [
         {
-          "name": "chunk_length",
-          "type": "short"
-        },
-        {
           "name": "chunk_data",
           "type": "byte_array"
         },

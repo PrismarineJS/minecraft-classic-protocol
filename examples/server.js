@@ -15,17 +15,25 @@ server.on('login', function(client) {
   });
 
   client.write('level_initialize', {});
-  /*client.write('level_data_chunk', {
-    chunk_length: 0,
-    chunk_data: 0,
+  client.write('level_data_chunk', {
+    chunk_data: [1,2,3],
     percent_complete: 100
-  });*/
+  });
 
-  /*client.write('level_finalize', {
+  client.write('level_finalize', {
     x_size: 10,
     y_size: 10,
     z_size: 10
-  });*/
+  });
+
+  client.write('player_teleport',{
+    player_id:players,
+    x:0,
+    y:0,
+    z:0,
+    yaw:0,
+    pitch:0
+  });
 
   client.write('spawn_player', {
     player_id: players,

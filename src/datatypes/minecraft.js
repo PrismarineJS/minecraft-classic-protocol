@@ -1,6 +1,6 @@
 module.exports={
   'string': [readString, writeString, 64],
-  'byte_array': [readByteArray, writeByteArray, 1024]
+  'byte_array': [readByteArray, writeByteArray, sizeOfByteArray]
 };
 
 var tryCatch=require('protodef').utils.tryCatch;
@@ -24,6 +24,9 @@ function writeString(value, buffer, offset) {
   return offset + 64;
 }
 
+var zlib = require("zlib");
+
+// TODO: fix this (we only need write currently so I didn't fix it)
 function readByteArray(buffer, offset) {
   var results = {
     value: [],
@@ -46,13 +49,30 @@ function readByteArray(buffer, offset) {
 }
 
 function writeByteArray(value, buffer, offset) {
-    for(var index in value) {
-    tryCatch(() => {
-      offset = this.write(value[index], buffer, offset, "byte");
-    }, (e) => {
-      addErrorField(e, index);
-      throw e;
-    });
-  }
-  return offset;
+  offset=this.write(value.length, buffer, 0, "short");
+
+  var buf=new Buffer(1024);
+  var off=0;
+  for(var i=0;i<1024;i++)
+      off = this.write(i >= value.length ? 0 : value[i], buf, off, "byte");
+
+  var compressed=zlib.deflateSync(buf);
+  buffer.writeUInt8(0x1f,offset);
+  buffer.writeUInt8(0x8b,offset+1);
+  compressed.copy(buffer,offset+2);
+
+
+  return offset+2+compressed.length;
+}
+
+function sizeOfByteArray(value) {
+
+  var buf=new Buffer(1024);
+  var off=0;
+  for(var i=0;i<1024;i++)
+    off = this.write(i >= value.length ? 0 : value[i], buf, off, "byte");
+
+  var compressed=zlib.deflateSync(buf);
+
+  return 2+2+compressed.length;
 }
