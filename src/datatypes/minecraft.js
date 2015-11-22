@@ -41,12 +41,13 @@ function readByteArray(buffer, offset) {
   var off=0;
   for(var i = 0; i < uncompressed.length; i++) {
     var readResults;
-    tryCatch(() => {
-      readResults = this.read(uncompressed.length, off, "byte");
-    }, (e) => {
+    try {
+      readResults = this.read(uncompressed, off, "byte");
+    }
+    catch(e){
       addErrorField(e, i);
       throw e;
-    });
+    }
     results.size += readResults.size;
     off += readResults.size;
     results.value.push(readResults.value);
