@@ -37,6 +37,8 @@ function readByteArray(buffer, offset) {
     size: 2
   };
 
+  if(offset+countResults.value>buffer.length)
+    throw new PartialReadError();
   var uncompressed=zlib.deflateSync(buffer.slice(offset+2,offset+countResults.value));
   results.size+=1024;
 
