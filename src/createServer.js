@@ -22,34 +22,34 @@ function createServer(options) {
   server.onlineModeExceptions = {};
   
   server.on("connection", function (client) {
-        client.once('player_identification', onLogin);
-        client.on('end', onEnd);
+    client.once('player_identification', onLogin);
+    client.on('end', onEnd);
 
-        var ping = true;
-        var pingTimer = null;
+    var ping = true;
+    var pingTimer = null;
 
-        function pingLoop() {
-          client.write('ping', {});
-        }
+    function pingLoop() {
+      client.write('ping', {});
+    }
 
-        function startPing() {
-          pingTimer = setInterval(pingLoop, checkTimeoutInterval);
-        }
+    function startPing() {
+      pingTimer = setInterval(pingLoop, checkTimeoutInterval);
+    }
 
-        function onEnd() {
-          clearInterval(pingTimer);
-        }
+    function onEnd() {
+      clearInterval(pingTimer);
+    }
 
-        function onLogin(packet) {
-          client.write("server_identification",{
-              "protocol_version": 0x07,
-              "server_name": "test",
-              "server_motd": "test",
-              "user_type": 0
-            });
-          server.emit('login', client);
-          startPing();
-        }
+    function onLogin(packet) {
+      client.write("server_identification",{
+          "protocol_version": 0x07,
+          "server_name": "test",
+          "server_motd": "test",
+          "user_type": 0
+        });
+      server.emit('login', client);
+      startPing();
+    }
   });
   server.listen(port, host);
   return server;
