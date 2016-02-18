@@ -3,12 +3,14 @@ module.exports={
   'byte_array': [readByteArray, writeByteArray, sizeOfByteArray]
 };
 
+var PartialReadError=require('protodef').utils.PartialReadError;
 var tryCatch=require('protodef').utils.tryCatch;
 var addErrorField=require('protodef').utils.addErrorField;
 
 
 function readString(buffer, offset) {
-
+  if(offset+64>buffer.length)
+    throw new PartialReadError();
   var value = buffer.toString('ascii', offset, offset + 64);
   value=value.trim();
   return {
