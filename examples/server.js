@@ -1,6 +1,6 @@
 var mc = require('../');
 
-var options = { port: 25565 };
+var options = { port: 25566 };
 var server = mc.createServer(options);
 var players = 0;
 

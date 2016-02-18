@@ -60,15 +60,13 @@ function writeByteArray(value, buffer, offset) {
   var buf=new Buffer(1024);
   var off=0;
   for(var i=0;i<1024;i++)
-      off = this.write(i >= value.length ? 0 : value[i], buf, off, "byte");
+      off = this.write(i >= value.length ? 0 : value[i], buf, off, "ubyte");
 
   var compressed=zlib.deflateSync(buf);
-  buffer.writeUInt8(0x1f,offset);
-  buffer.writeUInt8(0x8b,offset+1);
-  compressed.copy(buffer,offset+2);
+  compressed.copy(buffer,offset);
 
 
-  return offset+2+compressed.length;
+  return offset+compressed.length;
 }
 
 function sizeOfByteArray(value) {
