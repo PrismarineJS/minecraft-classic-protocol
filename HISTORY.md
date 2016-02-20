@@ -1,6 +1,10 @@
 History
 ====
 
+## 1.2.0
+
+* client and server example now work
+
 
 ## 0.1.0
 *Initial working release*
