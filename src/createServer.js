@@ -43,8 +43,8 @@ function createServer(options) {
     function onLogin(packet) {
       client.write("server_identification",{
           "protocol_version": 0x07,
-          "server_name": "test",
-          "server_motd": "test",
+          "server_name": "Minecraft Server",
+          "server_motd": "Welcome to my Minecraft Server!",
           "user_type": 0
         });
       server.emit('login', client);

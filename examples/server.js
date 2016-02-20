@@ -4,6 +4,9 @@ var options = { port: 25566 };
 var server = mc.createServer(options);
 var players = 0;
 
+
+var zlib=require("zlib");
+
 server.on('login', function(client) {
   players++;
   console.log("Someone connected!");
@@ -16,15 +19,17 @@ server.on('login', function(client) {
 
   client.write('level_initialize', {});
 
-  var map=[];
-  for(var i=0;i<1020;i++) {
-    map.push(1);
-  }
+  var map=new Buffer(4194308);
+  map.fill(1);
+  map.writeInt32BE(256*64*256,0);
+  var compressedMap=zlib.gzipSync(map);
 
-  client.write('level_data_chunk', {
-    chunk_data: map,
-    percent_complete: 100
-  });
+  for(var i=0;i<compressedMap.length;i+=1024) {
+    client.write('level_data_chunk', {
+      chunk_data: compressedMap.slice(i, Math.min(i + 1024, compressedMap.length)),
+      percent_complete: i==0 ? 0 : Math.ceil(i/compressedMap.length * 100)
+    });
+  }
 
   client.write('level_finalize', {
     x_size: 256,
@@ -43,12 +48,18 @@ server.on('login', function(client) {
 
   client.write('spawn_player', {
     player_id: -1,
-    player_name: "player" + players,
+    player_name: "UserXYZ",
     x: 3184,
     y: 1392,
     z: 5712,
     yaw: 0,
     pitch: 0
+  });
+
+
+  client.write('message', {
+    player_id: -1,
+    message: 'UserXYZ joined the game'
   });
 
 });

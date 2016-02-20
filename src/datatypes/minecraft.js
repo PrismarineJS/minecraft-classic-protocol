@@ -4,9 +4,6 @@ module.exports={
 };
 
 var PartialReadError=require('protodef').utils.PartialReadError;
-var tryCatch=require('protodef').utils.tryCatch;
-var addErrorField=require('protodef').utils.addErrorField;
-
 
 function readString(buffer, offset) {
   if(offset+64>buffer.length)
@@ -43,13 +40,13 @@ function readByteArray(buffer, offset) {
 
 function writeByteArray(value, buffer, offset) {
   offset=this.write(value.length, buffer, offset, "i16");
-  offset+=value.copy(buffer);
+  offset+=value.copy(buffer,offset);
   var buf=new Buffer(1024-value.length);
   buf.fill(0);
   offset+=buf.copy(buffer,offset);
   return offset;
 }
 
-function sizeOfByteArray(value) {
+function sizeOfByteArray() {
   return 2+1024;
 }
