@@ -27,11 +27,11 @@ server.on('login', function(client) {
   });
 
   client.write('level_finalize', {
-    x_size: 10,
-    y_size: 10,
-    z_size: 10
+    x_size: 256,
+    y_size: 64,
+    z_size: 256
   });
-
+/*
   client.write('player_teleport',{
     player_id:players,
     x:0,
@@ -39,14 +39,14 @@ server.on('login', function(client) {
     z:0,
     yaw:0,
     pitch:0
-  });
+  });*/
 
   client.write('spawn_player', {
-    player_id: players,
+    player_id: -1,
     player_name: "player" + players,
-    x: 0,
-    y: 0,
-    z: 0,
+    x: 3184,
+    y: 1392,
+    z: 5712,
     yaw: 0,
     pitch: 0
   });

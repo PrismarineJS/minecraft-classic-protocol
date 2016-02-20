@@ -15,3 +15,15 @@ var client = mc.createClient({
 client.on('connect', function() {
   console.info('connected');
 });
+
+var map=new Buffer(0);
+var zlib=require("zlib");
+
+
+client.on('level_data_chunk',function(data) {
+  map=Buffer.concat([map,data.chunk_data]);
+});
+
+client.on('level_finalize',function() {
+  console.log(zlib.gunzipSync(map))
+});

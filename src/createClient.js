@@ -42,7 +42,4 @@ function createClient(options) {
   }
 
   return client;
-
-
-
 }

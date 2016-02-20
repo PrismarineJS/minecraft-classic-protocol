@@ -16,7 +16,7 @@ function createProtocol(packets) {
   proto.addType("packet", ["container", [{
     "name": "name",
     "type": ["mapper", {
-      "type": "ubyte",
+      "type": "u8",
       "mappings": Object.keys(packets).reduce(function (acc, name) {
         acc[parseInt(packets[name].id)] = name;
         return acc;

@@ -28,59 +28,28 @@ function writeString(value, buffer, offset) {
 
 var zlib = require("zlib");
 
-// TODO: fix this (we only need write currently so I didn't fix it)
 function readByteArray(buffer, offset) {
   var countResults = this.read(buffer, offset, "i16");
+  offset+=2;
 
-  var results = {
-    value: [],
-    size: 2
-  };
-
-  if(offset+countResults.value>buffer.length)
+  if(offset+1024>buffer.length)
     throw new PartialReadError();
-  var uncompressed=zlib.deflateSync(buffer.slice(offset+2,offset+countResults.value));
-  results.size+=1024;
 
-  var off=0;
-  for(var i = 0; i < uncompressed.length; i++) {
-    var readResults;
-    try {
-      readResults = this.read(uncompressed, off, "u8");
-    }
-    catch(e){
-      addErrorField(e, i);
-      throw e;
-    }
-    off += readResults.size;
-    results.value.push(readResults.value);
-  }
-  return results;
+  return {
+    value:buffer.slice(offset,offset+countResults.value),
+    size:2+1024
+  };
 }
 
 function writeByteArray(value, buffer, offset) {
-  offset=this.write(value.length, buffer, 0, "i16");
-
-  var buf=new Buffer(1024);
-  var off=0;
-  for(var i=0;i<1024;i++)
-      off = this.write(i >= value.length ? 0 : value[i], buf, off, "u8");
-
-  var compressed=zlib.deflateSync(buf);
-  compressed.copy(buffer,offset);
-
-
-  return offset+compressed.length;
+  offset=this.write(value.length, buffer, offset, "i16");
+  offset+=value.copy(buffer);
+  var buf=new Buffer(1024-value.length);
+  buf.fill(0);
+  offset+=buf.copy(buffer,offset);
+  return offset;
 }
 
 function sizeOfByteArray(value) {
-
-  var buf=new Buffer(1024);
-  var off=0;
-  for(var i=0;i<1024;i++)
-    off = this.write(i >= value.length ? 0 : value[i], buf, off, "i8");
-
-  var compressed=zlib.deflateSync(buf);
-
-  return 2+2+compressed.length;
+  return 2+1024;
 }

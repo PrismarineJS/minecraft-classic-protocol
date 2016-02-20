@@ -15,7 +15,7 @@
   "author": "mhsjlw <mhsjlw@aol.com>",
   "license": "MIT",
   "dependencies": {
-    "protodef": "^1.0.0",
+    "protodef": "^1.0.3",
     "babel-runtime": "^5.4.4"
   },
   "devDependencies": {
