@@ -5,7 +5,7 @@
       "fields": [
         {
           "name": "protocol_version",
-          "type": "ubyte"
+          "type": "u8"
         },
         {
           "name": "username",
@@ -17,7 +17,7 @@
         },
         {
           "name": "unused",
-          "type": "byte"
+          "type": "i8"
         }
       ]
     },
@@ -26,23 +26,23 @@
       "fields": [
         {
           "name": "x",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "y",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "z",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "mode",
-          "type": "ubyte"
+          "type": "u8"
         },
         {
           "name": "block_type",
-          "type": "ubyte"
+          "type": "u8"
         }
       ]
     },
@@ -51,27 +51,27 @@
       "fields": [
         {
           "name": "player_id",
-          "type": "ubyte"
+          "type": "u8"
         },
         {
           "name": "x",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "y",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "z",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "yaw",
-          "type": "ubyte"
+          "type": "u8"
         },
         {
           "name": "pitch",
-          "type": "ubyte"
+          "type": "u8"
         }
       ]
     },
@@ -80,7 +80,7 @@
       "fields": [
         {
           "name": "unused",
-          "type": "ubyte"
+          "type": "u8"
         },
         {
           "name": "message",
@@ -95,7 +95,7 @@
       "fields": [
         {
           "name": "protocol_version",
-          "type": "ubyte"
+          "type": "u8"
         },
         {
           "name": "server_name",
@@ -107,7 +107,7 @@
         },
         {
           "name": "user_type",
-          "type": "byte"
+          "type": "i8"
         }
       ]
     },
@@ -130,7 +130,7 @@
         },
         {
           "name": "percent_complete",
-          "type": "ubyte"
+          "type": "u8"
         }
       ]
     },
@@ -139,15 +139,15 @@
       "fields": [
         {
           "name": "x_size",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "y_size",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "z_size",
-          "type": "short"
+          "type": "i16"
         }
       ]
     },
@@ -156,19 +156,19 @@
       "fields": [
         {
           "name": "x",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "y",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "z",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "block_type",
-          "type": "ubyte"
+          "type": "u8"
         }
       ]
     },
@@ -177,7 +177,7 @@
       "fields": [
         {
           "name": "player_id",
-          "type":"byte"
+          "type":"i8"
         },
         {
           "name": "player_name",
@@ -185,23 +185,23 @@
         },
         {
           "name": "x",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "y",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "z",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "yaw",
-          "type": "ubyte"
+          "type": "u8"
         },
         {
           "name": "pitch",
-          "type": "ubyte"
+          "type": "u8"
         }
       ]
     },
@@ -210,27 +210,27 @@
       "fields": [
         {
           "name": "player_id",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "x",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "y",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "z",
-          "type": "short"
+          "type": "i16"
         },
         {
           "name": "yaw",
-          "type": "ubyte"
+          "type": "u8"
         },
         {
           "name": "pitch",
-          "type": "ubyte"
+          "type": "u8"
         }
       ]
     },
@@ -239,27 +239,27 @@
       "fields": [
         {
           "name": "player_id",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "change_in_x",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "change_in_y",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "change_in_z",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "yaw",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "pitch",
-          "type": "byte"
+          "type": "i8"
         }
       ]
     },
@@ -268,19 +268,19 @@
       "fields": [
         {
           "name": "player_id",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "change_in_x",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "change_in_y",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "change_in_z",
-          "type": "byte"
+          "type": "i8"
         }
       ]
     },
@@ -289,15 +289,15 @@
       "fields": [
         {
           "name": "player_id",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "yaw",
-          "type": "ubyte"
+          "type": "u8"
         },
         {
           "name": "pitch",
-          "type": "ubyte"
+          "type": "u8"
         }
       ]
     },
@@ -306,7 +306,7 @@
       "fields": [
         {
           "name": "player_id",
-          "type": "byte"
+          "type": "i8"
         }
       ]
     },
@@ -315,7 +315,7 @@
       "fields": [
         {
           "name": "player_id",
-          "type": "byte"
+          "type": "i8"
         },
         {
           "name": "message",
@@ -337,7 +337,7 @@
       "fields": [
         {
           "name": "user_type",
-          "type": "ubyte"
+          "type": "u8"
         }
       ]
     }
