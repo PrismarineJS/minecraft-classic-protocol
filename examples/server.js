@@ -36,15 +36,6 @@ server.on('login', function(client) {
     y_size: 64,
     z_size: 256
   });
-/*
-  client.write('player_teleport',{
-    player_id:players,
-    x:0,
-    y:0,
-    z:0,
-    yaw:0,
-    pitch:0
-  });*/
 
   client.write('spawn_player', {
     player_id: -1,
