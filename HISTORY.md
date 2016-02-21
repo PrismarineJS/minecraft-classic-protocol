@@ -1,6 +1,10 @@
 History
 ====
 
+## 1.2.2
+
+* actually implement the motd option
+
 ## 1.2.1
 
 * createServer.js
