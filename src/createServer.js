@@ -43,12 +43,25 @@ function createServer(options) {
 
     function onLogin(packet) {
       client.username=packet.username;
+      client.identification_byte=packet.unused;
+
+      if(options.handshake)
+      {
+        options.handshake(function(){
+          continueLogin();
+        })
+      }
+      else
+        continueLogin();
+    }
+
+    function continueLogin() {
       client.write("server_identification",{
-          "protocol_version": 0x07,
-          "server_name": server.name,
-          "server_motd": server.motd,
-          "user_type": 0
-        });
+        "protocol_version": 0x07,
+        "server_name": server.name,
+        "server_motd": server.motd,
+        "user_type": 0
+      });
       server.emit('login', client);
       startPing();
     }
