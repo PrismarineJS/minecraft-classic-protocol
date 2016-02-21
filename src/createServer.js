@@ -41,6 +41,7 @@ function createServer(options) {
     }
 
     function onLogin(packet) {
+      client.username=packet.username;
       client.write("server_identification",{
           "protocol_version": 0x07,
           "server_name": "Minecraft Server",

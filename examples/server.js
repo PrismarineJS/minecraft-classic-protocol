@@ -39,7 +39,7 @@ server.on('login', function(client) {
 
   client.write('spawn_player', {
     player_id: -1,
-    player_name: "UserXYZ",
+    player_name: client.username,
     x: 3184,
     y: 1392,
     z: 5712,
@@ -50,7 +50,7 @@ server.on('login', function(client) {
 
   client.write('message', {
     player_id: -1,
-    message: 'UserXYZ joined the game'
+    message: client.username+' joined the game'
   });
 
 });
