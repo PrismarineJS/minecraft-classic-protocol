@@ -1,6 +1,10 @@
 History
 ====
 
+## 1.2.1
+
+* createServer.js
+
 ## 1.2.0
 
 * client and server example now work
