@@ -15,7 +15,8 @@ function createServer(options) {
   var enablePing = options.ping == null ? true : options.ping;
 
   var server = new Server();
-  
+
+  server.name= options.name || "Minecraft Server";
   server.motd = options.motd || "A Minecraft server";
   server.maxPlayers = options['max-players'] || 20;
   server.playerCount = 0;
@@ -44,8 +45,8 @@ function createServer(options) {
       client.username=packet.username;
       client.write("server_identification",{
           "protocol_version": 0x07,
-          "server_name": "Minecraft Server",
-          "server_motd": "Welcome to my Minecraft Server!",
+          "server_name": server.name,
+          "server_motd": server.motd,
           "user_type": 0
         });
       server.emit('login', client);
