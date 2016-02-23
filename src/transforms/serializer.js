@@ -15,7 +15,7 @@ function createProtocol(packets) {
 function createSerializer(isServer = false) {
   var mcData = require("../../data/protocol");
   var direction = !isServer ? 'toServer' : 'toClient';
-  var packets = mcData[direction];
+  var packets = mcData[direction].types;
   var proto = createProtocol(packets);
   return new Serializer(proto, "packet");
 }
@@ -23,7 +23,7 @@ function createSerializer(isServer = false) {
 function createDeserializer(isServer = false) {
   var mcData = require("../../data/protocol");
   var direction = isServer ? "toServer" : "toClient";
-  var packets = mcData[direction];
+  var packets = mcData[direction].types;
   var proto = createProtocol(packets);
   return new Parser(proto, "packet");
 }
