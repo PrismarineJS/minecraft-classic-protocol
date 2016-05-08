@@ -1,6 +1,9 @@
 History
 ====
 
+## 1.2.6
+* export Client and Server to allow extension for other protocols, ex. websockets
+
 ## 1.2.2
 
 * actually implement the motd option

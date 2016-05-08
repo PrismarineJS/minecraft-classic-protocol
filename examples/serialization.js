@@ -1,24 +1,24 @@
-var mcClassic=require("../");
+var mcClassic = require('../');
 
-var serializer=mcClassic.createSerializer(true);
-var parser=mcClassic.createDeserializer(false);
+var serializer = mcClassic.createSerializer(true);
+var parser = mcClassic.createDeserializer(false);
 
 serializer.write({
-  name: "level_finalize",
+  name: 'level_finalize',
   params: {
-    "x_size": 1,
-    "y_size": 1,
-    "z_size": 1
+    'x_size': 1,
+    'y_size': 1,
+    'z_size': 1
   }
 });
 
 serializer.write({
-  name: "server_identification",
+  name: 'server_identification',
   params: {
-    "protocol_version": 0x07,
-    "server_name": "test",
-    "server_motd": "test",
-    "user_type": 0
+    'protocol_version': 0x07,
+    'server_name': 'test',
+    'server_motd': 'test',
+    'user_type': 0
   }
 });
 

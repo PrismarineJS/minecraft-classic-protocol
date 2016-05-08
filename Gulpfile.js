@@ -2,13 +2,13 @@ var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
-var options = { stage: 0, optional: ["runtime"] };
+var options = { stage: 0, optional: ['runtime'] };
 
-gulp.task('compile', function() {
+gulp.task('compile', function () {
   return gulp
     .src('src/**/*.js')
     .pipe(plumber({
-      errorHandler: function(err) {
+      errorHandler: function (err) {
         console.error(err.stack);
         this.emit('end');
       }
@@ -20,7 +20,7 @@ gulp.task('compile', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   return gulp.watch('src/**/*.js', ['compile']);
 });
 
