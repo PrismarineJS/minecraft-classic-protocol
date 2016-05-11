@@ -1,6 +1,11 @@
 History
 ====
 
+## 1.3.0
+* add support for custom packets
+* add custom packets example
+* add websockets example
+
 ## 1.2.6
 * export Client and Server to allow extension for other protocols, ex. websockets
 
