@@ -45,6 +45,7 @@ function createServer(options) {
     function onLogin(packet) {
       client.username=packet.username;
       client.identification_byte=packet.unused;
+      client.verification_key=packet.verification_key;
 
       if(options.handshake)
       {
