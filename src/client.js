@@ -22,7 +22,7 @@ class Client extends EventEmitter {
 
 
     this.serializer.on('error', (e) => {
-      var parts = e.field.split(".");
+      var parts = e.field ? e.field.split(".") : [];
       parts.shift();
       var serializerDirection = !this.isServer ? 'toServer' : 'toClient';
       e.field = [serializerDirection].concat(parts).join(".");
@@ -32,7 +32,7 @@ class Client extends EventEmitter {
 
 
     this.deserializer.on('error', (e) => {
-      var parts = e.field.split(".");
+      var parts = e.field ? e.field.split(".") : [];
       parts.shift();
       var deserializerDirection = this.isServer ? 'toServer' : 'toClient';
       e.field = [deserializerDirection].concat(parts).join(".");
