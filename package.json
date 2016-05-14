@@ -1,8 +1,8 @@
 {
   "name": "minecraft-classic-protocol",
-  "version": "1.2.6",
+  "version": "1.3.0",
   "main": "index.js",
-  "description": "Parse and serialize minecraft classic packets.",
+  "description": "Parse and serialize Minecraft Classic packets",
   "scripts": {
     "prepublish": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,8 +16,10 @@
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^5.4.4",
+    "lodash.get": "^4.3.0",
+    "lodash.merge": "^4.4.0",
     "minecraft-data": "^1.1.0",
-    "protodef": "^1.1.2"
+    "protodef": "^1.2.2"
   },
   "devDependencies": {
     "gulp": "3.8.11",

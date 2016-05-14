@@ -13,15 +13,16 @@ function createServer(options) {
   var onlineMode = options['online-mode'] == null ? true : options['online-mode'];
   var beforePing = options.beforePing || null;
   var enablePing = options.ping == null ? true : options.ping;
+  var customPackets = options.customPackets || {};
 
-  var server = new Server();
+  var server = new Server(customPackets);
 
   server.name= options.name || "Minecraft Server";
   server.motd = options.motd || "A Minecraft server";
   server.maxPlayers = options['max-players'] || 20;
   server.playerCount = 0;
   server.onlineModeExceptions = {};
-  
+
   server.on("connection", function (client) {
     client.once('player_identification', onLogin);
     client.on('end', onEnd);

@@ -9,19 +9,20 @@ class Client extends EventEmitter {
   deserializer;
   isServer;
 
-  constructor(isServer) {
+  constructor(isServer, customPackets) {
     super();
     this.isServer = !!isServer;
+    this.customPackets = customPackets;
   }
 
 
   setSerializer() {
-    this.serializer = createSerializer(this.isServer);
-    this.deserializer = createDeserializer(this.isServer);
+    this.serializer = createSerializer(this.isServer, this.customPackets);
+    this.deserializer = createDeserializer(this.isServer, this.customPackets);
 
 
     this.serializer.on('error', (e) => {
-      var parts = e.field.split(".");
+      var parts = e.field ? e.field.split(".") : [];
       parts.shift();
       var serializerDirection = !this.isServer ? 'toServer' : 'toClient';
       e.field = [serializerDirection].concat(parts).join(".");
@@ -31,7 +32,7 @@ class Client extends EventEmitter {
 
 
     this.deserializer.on('error', (e) => {
-      var parts = e.field.split(".");
+      var parts = e.field ? e.field.split(".") : [];
       parts.shift();
       var deserializerDirection = this.isServer ? 'toServer' : 'toClient';
       e.field = [deserializerDirection].concat(parts).join(".");

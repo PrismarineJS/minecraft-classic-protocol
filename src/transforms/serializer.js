@@ -2,30 +2,37 @@ var ProtoDef = require("protodef").ProtoDef;
 var Serializer = require("protodef").Serializer;
 var Parser = require("protodef").Parser;
 
+var merge = require("lodash.merge");
+var get = require("lodash.get");
+
 var minecraft = require("../datatypes/minecraft");
 
-function createProtocol(packets) {
+
+function recursiveAddTypes(protocol, protocolData, path) {
+  if(protocolData === undefined)
+    return;
+
+  if(protocolData.types)
+    protocol.addTypes(protocolData.types);
+
+  recursiveAddTypes(protocol,get(protocolData,path.shift()),path);
+}
+
+function createProtocol(customPackets, direction) {
   var proto = new ProtoDef();
+  const packets=require("minecraft-data")("0.30c").protocol;
 
   proto.addTypes(minecraft);
-  proto.addTypes(packets);
+  recursiveAddTypes(proto, merge(packets,customPackets), [direction]);
   return proto;
 }
 
-function createSerializer(isServer = false) {
-  var mcData = require("minecraft-data")("0.30c").protocol;
-  var direction = !isServer ? 'toServer' : 'toClient';
-  var packets = mcData[direction].types;
-  var proto = createProtocol(packets);
-  return new Serializer(proto, "packet");
+function createSerializer(isServer = false, customPackets) {
+  return new Serializer(createProtocol(customPackets, !isServer ? 'toServer' : 'toClient'), "packet");
 }
 
-function createDeserializer(isServer = false) {
-  var mcData = require("minecraft-data")("0.30c").protocol;
-  var direction = isServer ? "toServer" : "toClient";
-  var packets = mcData[direction].types;
-  var proto = createProtocol(packets);
-  return new Parser(proto, "packet");
+function createDeserializer(isServer = false, customPackets) {
+  return new Parser(createProtocol(customPackets, isServer ? "toServer" : "toClient"), "packet");
 }
 
 module.exports = {
