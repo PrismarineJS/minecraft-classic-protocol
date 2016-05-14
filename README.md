@@ -11,13 +11,15 @@ Parse and serialize Minecraft Classic packets
   * Pure javascript
   * Easily send and listen for any packet
 
-
 ## Installation
 Simply run
 
     npm install minecraft-classic-protocol --save
 
 Then view our `examples` for inspiration!
+
+## CPE
+If you're interested in CPE support, check out [this module](https://github.com/mhsjlw/minecraft-classic-protocol-extension) and read the example in the `examples/cpe` folder
 
 ## Contributors
 This project is run by these guys:

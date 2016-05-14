@@ -1,0 +1,15 @@
+{
+  "name": "cpe",
+  "version": "1.0.0",
+  "description": "A Minecraft Classic protocol CPE example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "mhsjlw",
+  "license": "MIT",
+  "dependencies": {
+    "minecraft-classic-protocol-extension": "^1.0.0"
+  }
+}
