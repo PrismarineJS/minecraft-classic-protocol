@@ -1,6 +1,9 @@
 History
 =======
 
+## 1.3.1
+* capture player verification key
+
 ## 1.3.0
 * add support for custom packets
 * add custom packets example
