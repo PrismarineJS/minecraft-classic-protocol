@@ -6,8 +6,9 @@ class Server extends EventEmitter {
   socketServer = null;
   clients = {};
 
-  constructor() {
+  constructor(customPackets) {
     super();
+    this.customPackets = customPackets;
   }
 
   listen(port, host) {
@@ -15,7 +16,7 @@ class Server extends EventEmitter {
     var nextId = 0;
     self.socketServer = net.createServer();
     self.socketServer.on('connection', socket => {
-      var client = new Client(true);
+      var client = new Client(true, this.customPackets);
       client._end = client.end;
       client.end = function end(endReason) {
         client.write('disconnect_player', {

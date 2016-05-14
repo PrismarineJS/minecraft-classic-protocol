@@ -1,7 +1,7 @@
-var mc = require('minecraft-protocol');
+var mc = require('../');
 
 if (process.argv.length < 4 || process.argv.length > 6) {
-  console.log('Usage: node echo.js <host> <port> [<name>] [<password>]');
+  console.log('Usage: node echo.js <host> <port> [<name>]');
   process.exit(1);
 }
 
@@ -12,11 +12,11 @@ var customPackets = {
           'container', [
             {
               'name': 'age',
-              'type': 'i64'
+              'type': 'i32'
             },
             {
               'name': 'time',
-              'type': 'i64'
+              'type': 'i32'
             }
           ]
         ],
@@ -28,7 +28,7 @@ var customPackets = {
               'type': [
                 'mapper',
                 {
-                  'type': 'varint',
+                  'type': 'u8',
                   'mappings': {
                     '0x7A': 'custom_name'
                   }
@@ -57,7 +57,6 @@ var client = mc.createClient({
   host: process.argv[2],
   port: parseInt(process.argv[3]),
   username: process.argv[4] ? process.argv[4] : 'echo',
-  password: process.argv[5],
   customPackets: customPackets
 });
 
@@ -72,9 +71,8 @@ client.on('end', function (err) {
 });
 
 client.on('login', function () {
-  client.deserializer.write(new Buffer('7A0000000000909327fffffffffffffc18', 'hex'));
+  client.deserializer.write(new Buffer('7A0000000100000001', 'hex'));
   console.log('login');
-
 });
 
 client.on('custom_name', function (packet) {

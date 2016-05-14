@@ -9,15 +9,16 @@ class Client extends EventEmitter {
   deserializer;
   isServer;
 
-  constructor(isServer) {
+  constructor(isServer, customPackets) {
     super();
     this.isServer = !!isServer;
+    this.customPackets = customPackets;
   }
 
 
   setSerializer() {
-    this.serializer = createSerializer(this.isServer);
-    this.deserializer = createDeserializer(this.isServer);
+    this.serializer = createSerializer(this.isServer, this.customPackets);
+    this.deserializer = createDeserializer(this.isServer, this.customPackets);
 
 
     this.serializer.on('error', (e) => {

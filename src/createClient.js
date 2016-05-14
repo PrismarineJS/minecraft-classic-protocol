@@ -24,11 +24,11 @@ function createClient(options) {
   assert.ok(options, "options is required");
   var port = options.port || 25565;
   var host = options.host || 'localhost';
+  var customPackets = options.customPackets || {};
 
   assert.ok(options.username, "username is required");
 
-
-  var client = new Client(false);
+  var client = new Client(false, customPackets);
   client.on('connect', onConnect);
   client.username = options.username;
   client.connect(port, host);
