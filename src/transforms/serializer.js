@@ -29,7 +29,7 @@ function createProtocol(packets, customPackets, direction) {
 function createSerializer(isServer = false, customPackets) {
   var mcData = require("minecraft-data")("0.30c").protocol;
   var direction = !isServer ? 'toServer' : 'toClient';
-  var packets = mcData[direction].types;
+  var packets = mcData[direction];
   var proto = createProtocol(packets, customPackets, direction);
   return new Serializer(proto, "packet");
 }
@@ -37,7 +37,7 @@ function createSerializer(isServer = false, customPackets) {
 function createDeserializer(isServer = false, customPackets) {
   var mcData = require("minecraft-data")("0.30c").protocol;
   var direction = isServer ? "toServer" : "toClient";
-  var packets = mcData[direction].types;
+  var packets = mcData[direction];
   var proto = createProtocol(packets, customPackets, direction);
   return new Parser(proto, "packet");
 }
