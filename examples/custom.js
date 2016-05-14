@@ -62,17 +62,13 @@ var client = mc.createClient({
 
 client.on('connect', function () {
   console.info('connected');
+  client.deserializer.write(new Buffer('7A0000000100000001', 'hex'));
 });
 client.on('disconnect', function (packet) {
   console.log('disconnected: ' + packet.reason);
 });
 client.on('end', function (err) {
   console.log('Connection lost');
-});
-
-client.on('login', function () {
-  client.deserializer.write(new Buffer('7A0000000100000001', 'hex'));
-  console.log('login');
 });
 
 client.on('custom_name', function (packet) {

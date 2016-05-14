@@ -10,7 +10,7 @@ var minecraft = require("../datatypes/minecraft");
 
 function recursiveAddTypes(protocol, protocolData, path) {
   if(protocolData === undefined)
-    return
+    return;
 
   if(protocolData.types)
     protocol.addTypes(protocolData.types);
@@ -18,8 +18,9 @@ function recursiveAddTypes(protocol, protocolData, path) {
   recursiveAddTypes(protocol,get(protocolData,path.shift()),path);
 }
 
-function createProtocol(packets, customPackets, direction) {
+function createProtocol(customPackets, direction) {
   var proto = new ProtoDef();
+  const packets=require("minecraft-data")("0.30c").protocol;
 
   proto.addTypes(minecraft);
   recursiveAddTypes(proto, merge(packets,customPackets), [direction]);
@@ -27,19 +28,11 @@ function createProtocol(packets, customPackets, direction) {
 }
 
 function createSerializer(isServer = false, customPackets) {
-  var mcData = require("minecraft-data")("0.30c").protocol;
-  var direction = !isServer ? 'toServer' : 'toClient';
-  var packets = mcData[direction];
-  var proto = createProtocol(packets, customPackets, direction);
-  return new Serializer(proto, "packet");
+  return new Serializer(createProtocol(customPackets, !isServer ? 'toServer' : 'toClient'), "packet");
 }
 
 function createDeserializer(isServer = false, customPackets) {
-  var mcData = require("minecraft-data")("0.30c").protocol;
-  var direction = isServer ? "toServer" : "toClient";
-  var packets = mcData[direction];
-  var proto = createProtocol(packets, customPackets, direction);
-  return new Parser(proto, "packet");
+  return new Parser(createProtocol(customPackets, isServer ? "toServer" : "toClient"), "packet");
 }
 
 module.exports = {
