@@ -1,59 +1,58 @@
-var net = require('net');
-var EventEmitter = require('events').EventEmitter;
-var Client = require('./client');
+const net = require('net')
+const EventEmitter = require('events').EventEmitter
+const Client = require('./client')
 
 class Server extends EventEmitter {
-  socketServer = null;
-  clients = {};
-
-  constructor(customPackets) {
-    super();
-    this.customPackets = customPackets;
+  constructor (customPackets) {
+    super()
+    this.customPackets = customPackets
   }
 
-  listen(port, host) {
-    var self = this;
-    var nextId = 0;
-    self.socketServer = net.createServer();
+  listen (port, host) {
+    this.socketServer = null
+    this.clients = {}
+    const self = this
+    let nextId = 0
+    self.socketServer = net.createServer()
     self.socketServer.on('connection', socket => {
-      var client = new Client(true, this.customPackets);
-      client._end = client.end;
-      client.end = function end(endReason) {
+      const client = new Client(true, this.customPackets)
+      client._end = client.end
+      client.end = function end (endReason) {
         client.write('disconnect_player', {
           disconnect_reason: endReason
-        });
-        client._end(endReason);
-      };
-      client.id = nextId++;
-      self.clients[client.id] = client;
+        })
+        client._end(endReason)
+      }
+      client.id = nextId++
+      self.clients[client.id] = client
       client.on('end', function () {
-        delete self.clients[client.id];
-      });
-      client.setSocket(socket);
-      self.emit('connection', client);
-    });
+        delete self.clients[client.id]
+      })
+      client.setSocket(socket)
+      self.emit('connection', client)
+    })
     self.socketServer.on('error', function (err) {
-      self.emit('error', err);
-    });
+      self.emit('error', err)
+    })
     self.socketServer.on('close', function () {
-      self.emit('close');
-    });
+      self.emit('close')
+    })
     self.socketServer.on('listening', function () {
-      self.emit('listening');
-    });
-    self.socketServer.listen(port, host);
+      self.emit('listening')
+    })
+    self.socketServer.listen(port, host)
   }
 
-  close() {
-    var client;
-    for (var clientId in this.clients) {
-      if (!this.clients.hasOwnProperty(clientId)) continue;
+  close () {
+    let client
+    for (const clientId in this.clients) {
+      if (!(clientId in this.clients)) continue
 
-      client = this.clients[clientId];
-      client.end('ServerShutdown');
+      client = this.clients[clientId]
+      client.end('ServerShutdown')
     }
-    this.socketServer.close();
+    this.socketServer.close()
   }
 }
 
-module.exports = Server;
+module.exports = Server
